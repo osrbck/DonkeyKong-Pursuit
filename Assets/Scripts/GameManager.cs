@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-    public class GameManager
-    {
+    public class GameManager : MonoBehaviour
+{
         //public event Action OnLevelStarted;
         //public event Action OnLevelComplated;
 

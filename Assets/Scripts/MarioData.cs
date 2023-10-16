@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+public class MarioData : MonoBehaviour
 {
 
     [SerializeField] private float _moveSpeed;

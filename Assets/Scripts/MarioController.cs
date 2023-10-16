@@ -10,7 +10,8 @@ public class MarioController : MonoBehaviour
     private Collider2D[] _overlaps = new Collider2D[4];
     private Vector2 _direction;
 
-    private PlayerData _data;
+    private MarioData _data;
+    private MarioAgent _agent;
 
     [SerializeField] private bool _isClimbing;
     [SerializeField] private bool _isGround;
@@ -29,16 +30,21 @@ public class MarioController : MonoBehaviour
             _direction = GetComponent<Vector2>();
         if (_gizmo == null)
             _gizmo = transform.Find("Gizmo");
+
+        _data = GetComponent<MarioData>();
+        _agent = GetComponent<MarioAgent>();
     }
 
     private void Update()
     {
-        SetDirection();
-        CheckCollision();
+        //CheckCollision();
+        //SetDirection();
     }
 
     void FixedUpdate()
     {
+        CheckCollision();
+        SetDirection();
         _rigidbody.MovePosition(_rigidbody.position + _direction * Time.fixedDeltaTime);
 
     }
@@ -48,17 +54,18 @@ public class MarioController : MonoBehaviour
         if (_isClimbing)
         {
             _direction.y = Input.GetAxis("Vertical") * _data.ClimbSpeed * Time.deltaTime;
+            _rigidbody.gravityScale = 0f;
         }
-        else if (_isGround && Input.GetButtonDown("Jump"))
+        else if (_isGround && (Input.GetButtonDown("Jump") || Input.GetKey(KeyCode.W)))
         {
-            _direction = Vector2.up * _data.JumpSpeed;
+            _direction = Vector2.up * _data.JumpSpeed * Time.deltaTime;
         }
         else
         {
             _direction += Physics2D.gravity * Time.deltaTime;
         }
 
-        _direction.x = Input.GetAxis("Horizontal") * _data.MoveSpeed;
+        _direction.x = Input.GetAxis("Horizontal") * _data.MoveSpeed * Time.deltaTime;
 
         // Prevent gravity from building up infinitely
         if (_isGround)

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAgent : MonoBehaviour
+public class MarioAgent : MonoBehaviour
 {
+
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField] private Animator _animator;
@@ -22,7 +23,7 @@ public class PlayerAgent : MonoBehaviour
         _animator.SetTrigger("Jump");
     }
 
-    public void Move()
+    public void Move(Vector2 velocity)
     {
         if (velocity.x != 0f)
             _animator.SetBool("isRunning", true);
