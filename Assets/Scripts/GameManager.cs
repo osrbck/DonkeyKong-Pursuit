@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,18 +14,25 @@ namespace DonkeyKongPursuit
         private int _lives;
         private int _currentLevel;
 
+        //static instance variable to make it a Singleton
+        public static GameManager _instance;
+        private void Awake()
+        {
+            if (_instance == null)
+                _instance = this;
+            else
+                Destroy(this.gameObject);
+        }
+
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
             NewGame();
         }
 
-        private void NewGame()
+        private void LoadingScene()
         {
-            _lives = 3;
-            _score = 0;
-            LoadLevel(1);
-            // Load Game
+            SceneManager.LoadScene(_currentLevel);
         }
 
         private void LoadLevel(int levelIndex)
@@ -37,15 +45,17 @@ namespace DonkeyKongPursuit
             Invoke(nameof(LoadingScene), 2f);
         }
 
-        private void LoadingScene()
+        private void NewGame()
         {
-            SceneManager.LoadScene(_currentLevel);
+            _lives = 3;
+            _score = 0;
+            LoadLevel(1);
         }
 
         public void OnLevelCompleted()
         {
             _score = 1000;
-            int levelIndex = _currentLevel++;
+            int levelIndex = _currentLevel + 1;
 
             //User Configuration File
             levelIndex = PlayerPrefs.GetInt("CurrentLevel", levelIndex);

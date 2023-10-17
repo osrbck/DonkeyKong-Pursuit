@@ -7,12 +7,12 @@ namespace DonkeyKongPursuit
 {
     public class MarioController : MonoBehaviour
     {
+        private MarioData _marioData;
+
         private Rigidbody2D _rigidbody;
         private Collider2D _col;
         private Collider2D[] _overlaps = new Collider2D[4];
         private Vector2 _direction;
-        private MarioData _data;
-
 
         [SerializeField] private bool _isClimbing;
         [SerializeField] private bool _isGround;
@@ -33,7 +33,7 @@ namespace DonkeyKongPursuit
             if (_spriteRenderer == null)
                 _spriteRenderer = GetComponent<SpriteRenderer>();
 
-            _data = GetComponent<MarioData>();
+            _marioData = GetComponent<MarioData>();
         }
 
         private void OnEnable()
@@ -65,12 +65,12 @@ namespace DonkeyKongPursuit
             if (collision.collider.tag == "Danger")
             {
                 enabled = false;
-                FindObjectOfType<GameManager>().OnLevelFailed();
+                GameManager._instance.OnLevelFailed();
             }
-            else if(collision.collider.tag == "Danger")
+            else if(collision.collider.tag == "Princess")
             {
                 enabled = false;
-                FindObjectOfType<GameManager>().OnLevelCompleted();
+                GameManager._instance.OnLevelCompleted();
             }
         }
 
@@ -78,19 +78,19 @@ namespace DonkeyKongPursuit
         {
             if (_isClimbing)
             {
-                _direction.y = Input.GetAxis("Vertical") * _data.ClimbSpeed * Time.deltaTime;
+                _direction.y = Input.GetAxis("Vertical") * _marioData.ClimbSpeed * Time.deltaTime;
                 _rigidbody.gravityScale = 0f;
             }
             else if (_isGround && (Input.GetButtonDown("Jump") || Input.GetKey(KeyCode.W)))
             {
-                _direction = Vector2.up * _data.JumpSpeed * Time.deltaTime;
+                _direction = Vector2.up * _marioData.JumpSpeed * Time.deltaTime;
             }
             else
             {
                 _direction += Physics2D.gravity * Time.deltaTime;
             }
 
-            _direction.x = Input.GetAxis("Horizontal") * _data.MoveSpeed * Time.deltaTime;
+            _direction.x = Input.GetAxis("Horizontal") * _marioData.MoveSpeed * Time.deltaTime;
 
             // Prevent gravity from building up infinitely
             if (_isGround)
@@ -142,7 +142,18 @@ namespace DonkeyKongPursuit
 
         public void AnimateMario()
         {
-            if (_isClimbing) _spriteRenderer.sprite = _climbSprite;
+            if (_isClimbing && !_isGround)
+            {
+                //float verticalInput = Input.GetAxis("Vertical");
+                if (Mathf.Abs(_direction.y) != 0f)
+                {
+                    _spriteRenderer.flipX = !_spriteRenderer.flipX;
+                    _spriteRenderer.sprite = _climbSprite;
+                }
+                else
+                    _spriteRenderer.sprite = _climbSprite;
+            }
+                
             else if (_direction.x != 0f)
             {
                 _spriteIndex++;
