@@ -8,8 +8,11 @@ namespace DonkeyKongPursuit
     public class MarioController : MonoBehaviour
     {
         private MarioData _marioData;
+        
+        private MarioAgent _marioAgent;
         private PauseMenu _pauseMenu;
 
+        
         private Rigidbody2D _rigidbody;
         private Collider2D _col;
         private Collider2D[] _overlaps = new Collider2D[4];
@@ -18,10 +21,9 @@ namespace DonkeyKongPursuit
         [SerializeField] private bool _isClimbing;
         [SerializeField] private bool _isGround;
 
-        private SpriteRenderer _spriteRenderer;
-        public Sprite[] _runSprites;
-        public Sprite _climbSprite;
-        private int _spriteIndex;
+
+        public MarioData MarioData { get { return _marioData; } }
+        public bool IsClimbing { get { return _isClimbing; } }
 
         void Start()
         {
@@ -31,21 +33,20 @@ namespace DonkeyKongPursuit
                 _col = GetComponent<Collider2D>();
             if (_overlaps == null)
                 _overlaps = GetComponent<Collider2D[]>();
-            if (_spriteRenderer == null)
-                _spriteRenderer = GetComponent<SpriteRenderer>();
 
             _marioData = GetComponent<MarioData>();
+            _marioAgent= GetComponent<MarioAgent>();
         }
 
-        private void OnEnable()
-        {
-            InvokeRepeating(nameof(AnimateMario), 1f / 12f, 1f / 12f);
-        }
+        //private void OnEnable()
+        //{
+        //    InvokeRepeating(nameof(AnimateMario), 1f / 12f, 1f / 12f);
+        //}
 
-        private void OnDisable()
-        {
-            CancelInvoke();
-        }
+        //private void OnDisable()
+        //{
+        //    CancelInvoke();
+        //}
 
         private void Update()
         {
@@ -84,31 +85,27 @@ namespace DonkeyKongPursuit
             {
                 _direction.y = Input.GetAxis("Vertical") * _marioData.ClimbSpeed * Time.deltaTime;
                 _rigidbody.gravityScale = 0f;
+                _marioAgent.ClimbingAnimate(_direction);
             }
+
             else if (_isGround && (Input.GetButtonDown("Jump") || Input.GetKey(KeyCode.W)))
             {
                 _direction = Vector2.up * _marioData.JumpSpeed * Time.deltaTime;
             }
+
             else
             {
                 _direction += Physics2D.gravity * Time.deltaTime;
             }
 
             _direction.x = Input.GetAxis("Horizontal") * _marioData.MoveSpeed * Time.deltaTime;
+            if(_isGround)
+                _marioAgent.RunningAnimate(_direction);
 
             // Prevent gravity from building up infinitely
             if (_isGround)
             {
                 _direction.y = Mathf.Max(_direction.y, -1f);
-            }
-
-            if (_direction.x > 0f)
-            {
-                transform.eulerAngles = Vector3.zero;
-            }
-            else if (_direction.x < 0f)
-            {
-                transform.eulerAngles = new Vector3(0f, 180f, 0f);
             }
         }
 
@@ -144,31 +141,30 @@ namespace DonkeyKongPursuit
             }
         }
 
-        public void AnimateMario()
-        {
-            if (_isClimbing && !_isGround)
-            {
-                //float verticalInput = Input.GetAxis("Vertical");
-                if (Mathf.Abs(_direction.y) != 0f)
-                {
-                    _spriteRenderer.flipX = !_spriteRenderer.flipX;
-                    _spriteRenderer.sprite = _climbSprite;
-                }
-                else
-                    _spriteRenderer.sprite = _climbSprite;
-            }
-                
-            else if (_direction.x != 0f)
-            {
-                _spriteIndex++;
-                if (_spriteIndex >= _runSprites.Length)
-                {
-                    // Reset the index if it exceeds the array length
-                    _spriteIndex = 0;
-                }
-                _spriteRenderer.sprite = _runSprites[_spriteIndex];
-            }
-        }
+        //public void AnimateMario()
+        //{
+        //    if (_direction.x < 0f)
+        //        _spriteRenderer.flipX = true;
+
+        //    else
+        //        _spriteRenderer.flipX = false;
+
+        //    if (_direction.x != 0f)
+        //        _animator.SetBool("isRunning", true);
+
+        //    else
+        //        _animator.SetBool("isRunning", false);
+
+        //    if (_direction.y != 0f)
+        //        _animator.SetBool("isClimbing", true);
+
+        //    else
+        //    {
+        //        _animator.SetBool("isClimbing", false);
+        //        _animator.SetTrigger("Climb");
+        //    }
+
+        //}
 
     }
 }

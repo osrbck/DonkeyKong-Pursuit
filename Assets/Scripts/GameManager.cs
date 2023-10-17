@@ -9,6 +9,8 @@ namespace DonkeyKongPursuit
 {
     public class GameManager : MonoBehaviour
     {
+        
+        #region Fields
 
         private int _score;
         private int _lives;
@@ -16,6 +18,11 @@ namespace DonkeyKongPursuit
 
         //static instance variable to make it a Singleton
         public static GameManager _instance;
+
+        #endregion
+
+        #region Methods
+
         private void Awake()
         {
             if (_instance == null)
@@ -63,7 +70,7 @@ namespace DonkeyKongPursuit
             if (levelIndex < SceneManager.sceneCountInBuildSettings)
                 LoadLevel(levelIndex);
             else
-                LoadLevel(1);
+                LoadLevel(2);
 
         }
         
@@ -77,6 +84,8 @@ namespace DonkeyKongPursuit
                 LoadLevel(_currentLevel);
             }
         }
+
+        #endregion
 
     }
 }
