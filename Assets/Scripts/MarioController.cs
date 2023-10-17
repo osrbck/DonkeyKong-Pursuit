@@ -11,23 +11,16 @@ namespace DonkeyKongPursuit
         private Collider2D _col;
         private Collider2D[] _overlaps = new Collider2D[4];
         private Vector2 _direction;
-
         private MarioData _data;
-        private MarioAgent _agent;
+
 
         [SerializeField] private bool _isClimbing;
-        public bool Climbing { get { return _isClimbing; } }
         [SerializeField] private bool _isGround;
 
-        private void OnEnable()
-        {
-            InvokeRepeating(nameof(_agent.Move), 1f / 12f, 1f / 12f);
-        }
-
-        private void OnDisable()
-        {
-            CancelInvoke();
-        }
+        private SpriteRenderer _spriteRenderer;
+        public Sprite[] _runSprites;
+        public Sprite _climbSprite;
+        private int _spriteIndex;
 
         void Start()
         {
@@ -37,17 +30,26 @@ namespace DonkeyKongPursuit
                 _col = GetComponent<Collider2D>();
             if (_overlaps == null)
                 _overlaps = GetComponent<Collider2D[]>();
-            if (_direction == null)
-                _direction = GetComponent<Vector2>();
+            if (_spriteRenderer == null)
+                _spriteRenderer = GetComponent<SpriteRenderer>();
 
             _data = GetComponent<MarioData>();
-            _agent = GetComponent<MarioAgent>();
+        }
+
+        private void OnEnable()
+        {
+            InvokeRepeating(nameof(AnimateMario), 1f / 12f, 1f / 12f);
+        }
+
+        private void OnDisable()
+        {
+            CancelInvoke();
         }
 
         private void Update()
         {
-            //CheckCollision();
             //SetDirection();
+            //CheckCollision();
         }
 
         void FixedUpdate()
@@ -56,6 +58,20 @@ namespace DonkeyKongPursuit
             SetDirection();
             _rigidbody.MovePosition(_rigidbody.position + _direction * Time.fixedDeltaTime);
 
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.tag == "Danger")
+            {
+                enabled = false;
+                FindObjectOfType<GameManager>().OnLevelFailed();
+            }
+            else if(collision.collider.tag == "Danger")
+            {
+                enabled = false;
+                FindObjectOfType<GameManager>().OnLevelCompleted();
+            }
         }
 
         private void SetDirection()
@@ -121,6 +137,21 @@ namespace DonkeyKongPursuit
                 {
                     _isClimbing = true;
                 }
+            }
+        }
+
+        public void AnimateMario()
+        {
+            if (_isClimbing) _spriteRenderer.sprite = _climbSprite;
+            else if (_direction.x != 0f)
+            {
+                _spriteIndex++;
+                if (_spriteIndex >= _runSprites.Length)
+                {
+                    // Reset the index if it exceeds the array length
+                    _spriteIndex = 0;
+                }
+                _spriteRenderer.sprite = _runSprites[_spriteIndex];
             }
         }
 

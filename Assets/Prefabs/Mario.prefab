@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 65852058892641938}
   - component: {fileID: 4398072796144610699}
   - component: {fileID: 4108486268294645114}
-  - component: {fileID: -4451799969688979341}
   - component: {fileID: 4134843781118151966}
-  - component: {fileID: 2692395461143709588}
+  - component: {fileID: -4451799969688979341}
   m_Layer: 0
   m_Name: Mario
   m_TagString: Player
@@ -151,6 +150,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.7, y: 1}
   m_Direction: 0
+--- !u!114 &4134843781118151966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9110594516944299897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57d4cd02a30b4db0b6f87dbc106d134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 150
+  _jumpSpeed: 200
+  _climbSpeed: 80
 --- !u!114 &-4451799969688979341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,31 +179,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isClimbing: 0
   _isGround: 0
---- !u!114 &4134843781118151966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9110594516944299897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f57d4cd02a30b4db0b6f87dbc106d134, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 100
-  _jumpSpeed: 100
-  _climbSpeed: 100
---- !u!114 &2692395461143709588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9110594516944299897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3b1602277a2b422b8eeac300d325209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+  _runSprites:
+  - {fileID: 21300000, guid: 11f84e45a4ff44d98869b3290ea0c504, type: 3}
+  - {fileID: 21300000, guid: 0efe4bc5d25a543b287f2e51a62dc0c0, type: 3}
+  - {fileID: 21300000, guid: 11f84e45a4ff44d98869b3290ea0c504, type: 3}
+  - {fileID: 21300000, guid: ac1f5368a0034460b951b6d95da932e4, type: 3}
+  _climbSprite: {fileID: 21300000, guid: 6116d08fe00d842c685425ec93239a70, type: 3}
