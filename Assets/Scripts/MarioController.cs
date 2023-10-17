@@ -8,6 +8,7 @@ namespace DonkeyKongPursuit
     public class MarioController : MonoBehaviour
     {
         private MarioData _marioData;
+        private PauseMenu _pauseMenu;
 
         private Rigidbody2D _rigidbody;
         private Collider2D _col;
@@ -48,8 +49,11 @@ namespace DonkeyKongPursuit
 
         private void Update()
         {
-            //SetDirection();
-            //CheckCollision();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                MenuManager.GoToMenu(MenuName.Pause);
+            }
+                
         }
 
         void FixedUpdate()

@@ -49,7 +49,7 @@ namespace DonkeyKongPursuit
         {
             _lives = 3;
             _score = 0;
-            LoadLevel(1);
+            LoadLevel(2);
         }
 
         public void OnLevelCompleted()
