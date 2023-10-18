@@ -7,8 +7,6 @@ namespace DonkeyKongPursuit
 {
     public class MarioController : MonoBehaviour
     {
-        private PauseMenu _pauseMenu;
-
         private MarioData _marioData;
         public MarioData MarioData { get { return _marioData; } }
 
@@ -56,7 +54,9 @@ namespace DonkeyKongPursuit
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                MenuManager.GoToMenu(MenuName.Pause);
+                if (Time.timeScale != 0)
+                    MenuManager.GoToMenu(MenuName.Pause);
+
             }
         }
 
@@ -65,6 +65,7 @@ namespace DonkeyKongPursuit
             CheckCollision();
             SetDirection();
             _rigidbody.MovePosition(_rigidbody.position + _direction * Time.fixedDeltaTime);
+
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -85,13 +86,16 @@ namespace DonkeyKongPursuit
 
         private void SetDirection()
         {
+            float moveX = Input.GetAxis("Horizontal");
+            float moveY = Input.GetAxis("Vertical");
             if (_isClimbing)
             {
-                _direction.y = Input.GetAxis("Vertical") * _marioData.ClimbSpeed * Time.fixedDeltaTime;
-                _rigidbody.gravityScale = 0f;
+                _direction.y = moveY * _marioData.ClimbSpeed * Time.fixedDeltaTime;
+                _rigidbody.gravityScale = 0.4f;
+
             }
 
-            else if (_isGround && (Input.GetButtonDown("Jump") || Input.GetKey(KeyCode.W)))
+            else if (_isGround && Input.GetKeyDown(KeyCode.Space))
             {
                 _direction = Vector2.up * _marioData.JumpSpeed * Time.fixedDeltaTime;
             }
@@ -101,8 +105,7 @@ namespace DonkeyKongPursuit
                 _direction += Physics2D.gravity * Time.fixedDeltaTime;
             }
 
-            _direction.x = Input.GetAxis("Horizontal") * _marioData.MoveSpeed * Time.fixedDeltaTime;
-
+            _direction.x = moveX * _marioData.MoveSpeed * Time.fixedDeltaTime;
 
             // Prevent gravity from building up infinitely
             if (_isGround)
@@ -149,6 +152,8 @@ namespace DonkeyKongPursuit
                 {
                     _isClimbing = true;
                 }
+
+
             }
         }
 

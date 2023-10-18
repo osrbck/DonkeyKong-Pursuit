@@ -50,7 +50,7 @@ namespace DonkeyKongPursuit
             Camera cam = Camera.main;
             if (cam != null)
                 cam.cullingMask = 0;
-            Invoke(nameof(LoadingScene), 2.2f);
+            Invoke(nameof(LoadingScene), 5f);
         }
 
         private void NewGame()

@@ -387,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8108609076013568241}
-  - component: {fileID: 2911465660039114416}
+  - component: {fileID: 3106118779828326455}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -411,7 +411,7 @@ Transform:
   - {fileID: 8502181301429082008}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2911465660039114416
+--- !u!114 &3106118779828326455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -880,7 +880,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2911465660039114416}
+      - m_Target: {fileID: 3106118779828326455}
         m_TargetAssemblyTypeName: DonkeyKongPursuit.PauseMenu, Assembly-CSharp
         m_MethodName: HandleResumeButtonOnClick
         m_Mode: 1
@@ -1245,7 +1245,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2911465660039114416}
+      - m_Target: {fileID: 3106118779828326455}
         m_TargetAssemblyTypeName: DonkeyKongPursuit.PauseMenu, Assembly-CSharp
         m_MethodName: HandleQuitButtonOnClick
         m_Mode: 1
