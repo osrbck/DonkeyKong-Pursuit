@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 using UnityEngine.Audio;
 
 namespace DonkeyKongPursuit
 {
     public class AudioManager : MonoBehaviour
     {
-
+        public static AudioManager Instance{ get; private set; }
         private void Awake()
         {
+            if (Instance != null && Instance == this)
+                Destroy(this.gameObject);
+            else
+                Instance = this;
+
             if (PlayerPrefs.GetInt("MusicMuted", 0) == 0)
                 IsMusicMuted = false;
             else
@@ -20,6 +25,7 @@ namespace DonkeyKongPursuit
             else
                 IsSoundMuted = true;
         }
+
 
         [SerializeField] private AudioSource _musicPlayer;
         [SerializeField] private AudioSource[] _soundChannels;
@@ -52,7 +58,7 @@ namespace DonkeyKongPursuit
             }
         }
 
-       
+
 
         public void PlayMusic(AudioClip clip)
         {
@@ -71,7 +77,6 @@ namespace DonkeyKongPursuit
                 }
             }
         }
-
 
     }
 }

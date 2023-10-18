@@ -46,6 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _score: 0
   _lives: 0
-  _currentLevel: 0
+  _currentLevel: 2
   audioPlayer: {fileID: 3766102290520135367, guid: b16519c15bc1d42bb9d9a83a7ac66000, type: 3}
-  _uiSettings: {fileID: 0}

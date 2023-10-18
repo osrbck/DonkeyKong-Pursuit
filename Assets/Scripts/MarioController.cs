@@ -51,9 +51,9 @@ namespace DonkeyKongPursuit
             _colOverlaps = new Collider2D[4];
         }
 
-        
+
         private void Update()
-        {  
+        {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 MenuManager.GoToMenu(MenuName.Pause);
@@ -73,12 +73,12 @@ namespace DonkeyKongPursuit
             if (collision.collider.tag == "Danger")
             {
                 enabled = false;
-                GameManager._instance.OnLevelFailed();
+                GameManager.Instance.OnLevelFailed();
             }
             else if (collision.collider.tag == "Princess")
             {
                 enabled = false;
-                GameManager._instance.OnLevelComplated();
+                GameManager.Instance.OnLevelComplated();
             }
         }
 

@@ -16,11 +16,8 @@ namespace DonkeyKongPursuit
         [SerializeField] private int _lives;
         [SerializeField] private int _currentLevel;
 
-        public AudioManager audioPlayer;
-        [SerializeField] private UISettings _uiSettings;
-
         //static instance variable to make it a Singleton
-        public static GameManager _instance;
+        public static GameManager Instance { get; private set; }
 
         #endregion
 
@@ -28,8 +25,8 @@ namespace DonkeyKongPursuit
 
         private void Awake()
         {
-            if (_instance == null)
-                _instance = this;
+            if (Instance == null)
+                Instance = this;
             else
                 Destroy(this.gameObject);
         }
@@ -39,6 +36,7 @@ namespace DonkeyKongPursuit
             DontDestroyOnLoad(gameObject);
             NewGame();
         }
+      
 
         private void LoadingScene()
         {
@@ -52,7 +50,7 @@ namespace DonkeyKongPursuit
             Camera cam = Camera.main;
             if (cam != null)
                 cam.cullingMask = 0;
-            Invoke(nameof(LoadingScene), 2f);
+            Invoke(nameof(LoadingScene), 2.2f);
         }
 
         private void NewGame()

@@ -2,45 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using DonkeyKongPursuit;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEngine.Audio;
 namespace DonkeyKongPursuit
 {
-
-    public class UISettings : GameBehaviur
+    public class UISettings : MonoBehaviour
     {
         public Toggle MuteMusicToggle;
         public Toggle MuteSfxToggle;
 
-        public override void Init(GameManager gameManager)
+        private void Start()
         {
-            base.Init(gameManager);
 
-            if (gameManager.audioPlayer.IsMusicMuted)
+            if (AudioManager.Instance.IsMusicMuted)
                 MuteMusicToggle.isOn = true;
             else
                 MuteMusicToggle.isOn = false;
 
-            if (gameManager.audioPlayer.IsSoundMuted)
+            if (AudioManager.Instance.IsSoundMuted)
                 MuteSfxToggle.isOn = true;
             else
                 MuteSfxToggle.isOn = false;
 
             MuteMusicToggle.onValueChanged.AddListener(delegate { MuteMusic(); });
-            MuteSfxToggle.onValueChanged.AddListener(delegate { MuteSfx(); });
+            MuteMusicToggle.onValueChanged.AddListener(delegate { MuteSfx(); });
 
         }
-
-
         public void MuteMusic()
         {
-            _gameManager.audioPlayer.IsMusicMuted = MuteMusicToggle.isOn;
+            AudioManager.Instance.IsMusicMuted = MuteMusicToggle.isOn;
         }
         public void MuteSfx()
         {
-            _gameManager.audioPlayer.IsSoundMuted = MuteSfxToggle.isOn;
+            AudioManager.Instance.IsSoundMuted = MuteSfxToggle.isOn;
         }
     }
 }

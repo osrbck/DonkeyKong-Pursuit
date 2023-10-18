@@ -8,7 +8,6 @@ namespace DonkeyKongPursuit
     {
         Main,
         Pause,
-        Options
     }
 
 }

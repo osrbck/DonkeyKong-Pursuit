@@ -8,17 +8,18 @@ namespace DonkeyKongPursuit
 {
     public class PauseMenu : MonoBehaviour
     {
-
-        // Start is called before the first frame update
+        public static bool _gameIsPaused = false;
         void Start()
         {
             Time.timeScale = 0;
+            _gameIsPaused = true;
         }
 
         public void HandleResumeButtonOnClick()
         {
             Time.timeScale = 1;
             Destroy(gameObject);
+            _gameIsPaused = false;
         }
 
         public void HandleQuitButtonOnClick()
@@ -27,5 +28,9 @@ namespace DonkeyKongPursuit
             Destroy(gameObject);
             MenuManager.GoToMenu(MenuName.Main);
         }
+
+
+        
+
     }
 }
