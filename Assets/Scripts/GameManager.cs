@@ -9,12 +9,15 @@ namespace DonkeyKongPursuit
 {
     public class GameManager : MonoBehaviour
     {
-        
+
         #region Fields
 
-        private int _score;
-        private int _lives;
-        private int _currentLevel;
+        [SerializeField] private int _score;
+        [SerializeField] private int _lives;
+        [SerializeField] private int _currentLevel;
+
+        public AudioManager audioPlayer;
+        [SerializeField] private UISettings _uiSettings;
 
         //static instance variable to make it a Singleton
         public static GameManager _instance;
@@ -59,7 +62,7 @@ namespace DonkeyKongPursuit
             LoadLevel(2);
         }
 
-        public void OnLevelCompleted()
+        public void OnLevelComplated()
         {
             _score = 1000;
             int levelIndex = _currentLevel + 1;

@@ -13,8 +13,8 @@ namespace DonkeyKongPursuit
         public MarioData MarioData { get { return _marioData; } }
 
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private Sprite[] _runSprites;
         [SerializeField] private Sprite _climbSprite;
+        [SerializeField] private Sprite[] _runSprites;
         private int spriteID;
 
         [SerializeField] private bool _isGround;
@@ -27,26 +27,23 @@ namespace DonkeyKongPursuit
 
         private void OnEnable()
         {
-            InvokeRepeating(nameof(AnimateMario), 1f / 12f, 1f / 12f);
+            InvokeRepeating(nameof(AnimateMario), 1f / 15f, 1f / 14f);
         }
 
         private void OnDisable()
         {
             CancelInvoke();
         }
-        private void Awake()
+
+        void Start()
         {
+            _marioData = GetComponent<MarioData>();
             if (_spriteRenderer == null)
                 _spriteRenderer = GetComponent<SpriteRenderer>();
             if (_climbSprite == null)
                 _climbSprite = GetComponent<Sprite>();
             if (_runSprites == null)
                 _runSprites = GetComponent<Sprite[]>();
-            _marioData = GetComponent<MarioData>();
-        }
-
-        void Start()
-        {
             if (_rigidbody == null)
                 _rigidbody = GetComponent<Rigidbody2D>();
             if (_col == null)
@@ -56,13 +53,11 @@ namespace DonkeyKongPursuit
 
         
         private void Update()
-        {
-            
+        {  
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 MenuManager.GoToMenu(MenuName.Pause);
             }
-
         }
 
         private void FixedUpdate()
@@ -83,7 +78,7 @@ namespace DonkeyKongPursuit
             else if (collision.collider.tag == "Princess")
             {
                 enabled = false;
-                GameManager._instance.OnLevelCompleted();
+                GameManager._instance.OnLevelComplated();
             }
         }
 
@@ -107,6 +102,7 @@ namespace DonkeyKongPursuit
             }
 
             _direction.x = Input.GetAxis("Horizontal") * _marioData.MoveSpeed * Time.fixedDeltaTime;
+
 
             // Prevent gravity from building up infinitely
             if (_isGround)
@@ -160,7 +156,7 @@ namespace DonkeyKongPursuit
         {
             if (_isClimbing && !_isGround)
             {
-               _spriteRenderer.sprite = _climbSprite;       
+                _spriteRenderer.sprite = _climbSprite;
             }
 
             else if (_direction.x != 0f && _isGround)

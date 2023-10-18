@@ -11,13 +11,16 @@ namespace DonkeyKongPursuit
 
         private void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody2D>();
+            if(_rigidbody == null)
+                _rigidbody = GetComponent<Rigidbody2D>();
+
+            //_rigidbody.AddForce(Vector2.right * _barrelSpeed, ForceMode2D.Impulse);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             //RIGHT represents red-X-arrow of platforms
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
                 _rigidbody.AddForce(collision.transform.right * _barrelSpeed, ForceMode2D.Impulse);
         }
     }

@@ -7,6 +7,7 @@ namespace DonkeyKongPursuit
 {
     public class BarrelSpawner : MonoBehaviour
     {
+        private BarrelController _barrelCtrl;
         [SerializeField] private GameObject _barrelPrefab;
         [SerializeField] private float _minTime;
         [SerializeField] private float _maxTime;
