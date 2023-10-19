@@ -26,6 +26,16 @@ namespace DonkeyKongPursuit
                     //Instantiate Prefab
                     Object.Instantiate(Resources.Load("GameOver"));
                     break;
+
+                case MenuName.LevelFailed:
+                    //Instantiate Prefab
+                    Object.Instantiate(Resources.Load("LevelFailed"));
+                    break;
+
+                case MenuName.LevelComplated:
+                    //Instantiate Prefab
+                    Object.Instantiate(Resources.Load("LevelComplated"));
+                    break;
             }
         }
     }
