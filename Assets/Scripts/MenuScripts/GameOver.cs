@@ -9,6 +9,7 @@ namespace DonkeyKongPursuit
     {
         public void HandleRestartButtonOnClick()
         {
+            GameManager.Instance.DestroyManager();
             SceneManager.LoadScene("Preload");
             Destroy(gameObject);
         }
