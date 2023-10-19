@@ -1,34 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace DonkeyKongPursuit
 {
-    public class PauseMenu : MonoBehaviour
+    public class GameOver : MonoBehaviour
     {
-
-        void Start()
+        public void HandleRestartButtonOnClick()
         {
-            Time.timeScale = 0;
-        }
-
-        public void HandleResumeButtonOnClick()
-        {
-            Time.timeScale = 1;
+            SceneManager.LoadScene("Preload");
             Destroy(gameObject);
         }
 
         public void HandleQuitButtonOnClick()
         {
-            Time.timeScale = 1;
             Destroy(gameObject);
             MenuManager.GoToMenu(MenuName.Main);
         }
-
-
-        
-
     }
 }

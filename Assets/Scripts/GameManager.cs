@@ -16,6 +16,7 @@ namespace DonkeyKongPursuit
         [SerializeField] private int _lives;
         [SerializeField] private int _currentLevel;
 
+        public int PlayerLives { get { return _lives; } }
         //static instance variable to make it a Singleton
         public static GameManager Instance { get; private set; }
 
@@ -36,7 +37,18 @@ namespace DonkeyKongPursuit
             DontDestroyOnLoad(gameObject);
             NewGame();
         }
-      
+
+        public void DestroyManager()
+        {
+            Destroy(gameObject);
+        }
+
+        private void NewGame()
+        {
+            _lives = 3;
+            _score = 0;
+            LoadLevel(2);
+        }
 
         private void LoadingScene()
         {
@@ -50,19 +62,14 @@ namespace DonkeyKongPursuit
             Camera cam = Camera.main;
             if (cam != null)
                 cam.cullingMask = 0;
-            Invoke(nameof(LoadingScene), 5f);
+
+            Invoke(nameof(LoadingScene), 2.3f);
         }
 
-        private void NewGame()
-        {
-            _lives = 3;
-            _score = 0;
-            LoadLevel(2);
-        }
 
         public void OnLevelComplated()
         {
-            _score = 1000;
+            _score += 1000;
             int levelIndex = _currentLevel + 1;
 
             //User Configuration File
@@ -71,15 +78,19 @@ namespace DonkeyKongPursuit
             if (levelIndex < SceneManager.sceneCountInBuildSettings)
                 LoadLevel(levelIndex);
             else
-                LoadLevel(2);
-
+            {
+                LoadLevel(0);
+            }
         }
-        
+
         public void OnLevelFailed()
         {
             _lives--;
             if (_lives <= 0)
-                NewGame();
+            {
+                MenuManager.GoToMenu(MenuName.GameOver);
+            }
+
             else
             {
                 LoadLevel(_currentLevel);

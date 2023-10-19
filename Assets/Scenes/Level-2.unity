@@ -474,7 +474,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _livesCounter: 0
   _livesText: {fileID: 887811514}
-  _GM: {fileID: 5518429125636044165, guid: c7741db46dd8a47dba5b9f2326f1aa2d, type: 3}
 --- !u!1 &123806453
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 123806454}
   m_Layer: 0
-  m_Name: Level-1
+  m_Name: Level-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -17,6 +17,7 @@ namespace DonkeyKongPursuit
 
         [SerializeField] private bool _isGround;
         [SerializeField] private bool _isClimbing;
+        private bool _isOnPlatform;
 
         private Vector2 _direction;
         private Rigidbody2D _rigidbody;
@@ -46,7 +47,8 @@ namespace DonkeyKongPursuit
                 _rigidbody = GetComponent<Rigidbody2D>();
             if (_col == null)
                 _col = GetComponent<Collider2D>();
-            _colOverlaps = new Collider2D[4];
+            if (_colOverlaps == null)
+                _colOverlaps = new Collider2D[4];
         }
 
 
@@ -56,13 +58,12 @@ namespace DonkeyKongPursuit
             {
                 if (Time.timeScale != 0)
                     MenuManager.GoToMenu(MenuName.Pause);
-
             }
         }
 
         private void FixedUpdate()
         {
-            CheckCollision();
+            MoveCollisionCheck();
             SetDirection();
             _rigidbody.MovePosition(_rigidbody.position + _direction * Time.fixedDeltaTime);
 
@@ -73,8 +74,9 @@ namespace DonkeyKongPursuit
 
             if (collision.collider.tag == "Danger")
             {
-                enabled = false;
+                Destroy(gameObject);
                 GameManager.Instance.OnLevelFailed();
+
             }
             else if (collision.collider.tag == "Princess")
             {
@@ -88,14 +90,15 @@ namespace DonkeyKongPursuit
         {
             float moveX = Input.GetAxis("Horizontal");
             float moveY = Input.GetAxis("Vertical");
+
             if (_isClimbing)
             {
                 _direction.y = moveY * _marioData.ClimbSpeed * Time.fixedDeltaTime;
-                _rigidbody.gravityScale = 0.4f;
+                _rigidbody.gravityScale = 0.3f;
 
             }
 
-            else if (_isGround && Input.GetKeyDown(KeyCode.Space))
+            else if (_isGround && Input.GetKey(KeyCode.W))
             {
                 _direction = Vector2.up * _marioData.JumpSpeed * Time.fixedDeltaTime;
             }
@@ -123,7 +126,7 @@ namespace DonkeyKongPursuit
             }
         }
 
-        private void CheckCollision()
+        private void MoveCollisionCheck()
         {
             _isGround = false;
             _isClimbing= false;
@@ -142,6 +145,7 @@ namespace DonkeyKongPursuit
 
                 if (hit.layer == LayerMask.NameToLayer("Platform"))
                 {
+
                     // Only set as grounded if the platform is below the player
                     _isGround = hit.transform.position.y < (transform.position.y - 0.5f + skinWidth);
 

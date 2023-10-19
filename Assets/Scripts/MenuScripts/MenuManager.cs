@@ -14,11 +14,17 @@ namespace DonkeyKongPursuit
                 case MenuName.Main:
                     //Load Menu
                     SceneManager.LoadScene("MainMenu");
+                    GameManager.Instance.DestroyManager();
                     break;
 
                 case MenuName.Pause:
                     //Instantiate Prefab
                     Object.Instantiate(Resources.Load("PauseMenu"));
+                    break;
+
+                case MenuName.GameOver:
+                    //Instantiate Prefab
+                    Object.Instantiate(Resources.Load("GameOver"));
                     break;
             }
         }
