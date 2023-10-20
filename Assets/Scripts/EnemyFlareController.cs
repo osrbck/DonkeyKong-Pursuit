@@ -10,7 +10,6 @@ namespace DonkeyKongPursuit
         [SerializeField] private float _flareMovement;
         [SerializeField] private int _patrolDestination;
 
-        [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Sprite[] runSprites;
         private int spriteID;

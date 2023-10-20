@@ -15,7 +15,7 @@ namespace DonkeyKongPursuit
 
         private void OnEnable()
         {
-            InvokeRepeating(nameof(AnimateMario), 1f / 15f, 1f / 14f);
+            InvokeRepeating(nameof(AnimateMario), 1f / 10f, 1f / 10f);
         }
 
         private void OnDisable()
