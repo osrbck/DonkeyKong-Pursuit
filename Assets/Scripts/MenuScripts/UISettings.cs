@@ -11,6 +11,8 @@ namespace DonkeyKongPursuit
         public Toggle MuteMusicToggle;
         public Toggle MuteSfxToggle;
 
+        public Toggle FullScreen;
+
         private void Start()
         {
 
@@ -35,6 +37,12 @@ namespace DonkeyKongPursuit
         public void MuteSfx()
         {
             AudioManager.Instance.IsSoundMuted = MuteSfxToggle.isOn;
+        }
+
+        public void IsFullScreen()
+        {
+            Screen.fullScreen = !Screen.fullScreen;
+            Debug.Log("ScreenRes");
         }
     }
 }
