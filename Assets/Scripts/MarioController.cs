@@ -55,7 +55,7 @@ namespace DonkeyKongPursuit
         private void OnCollisionEnter2D(Collision2D collision)
         {
 
-            if (collision.collider.tag == "Danger")
+            if (collision.collider.tag == "Danger" || collision.collider.tag == "Barrel")
             {
                 Destroy(gameObject);
                 GameManager.Instance.OnLevelFailed();
