@@ -472,9 +472,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f07c0a6e6df47889c7bc1edcef2dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _livesCounter: 0
+  livesCounter: 0
   _livesText: {fileID: 887811514}
-  _GM: {fileID: 5518429125636044165, guid: c7741db46dd8a47dba5b9f2326f1aa2d, type: 3}
 --- !u!1 &123806453
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,7 +2017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4134843781118151966, guid: fade7ffeac9f34f5e8d7c6f14b7d98e5, type: 3}
       propertyPath: _climbSpeed
-      value: 60
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4398072796144610699, guid: fade7ffeac9f34f5e8d7c6f14b7d98e5, type: 3}
       propertyPath: m_BodyType

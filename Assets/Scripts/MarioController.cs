@@ -10,39 +10,22 @@ namespace DonkeyKongPursuit
         private MarioData _marioData;
         public MarioData MarioData { get { return _marioData; } }
 
-        [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private Sprite _climbSprite;
-        [SerializeField] private Sprite[] _runSprites;
-        private int spriteID;
-
-        [SerializeField] private bool _isGround;
-        [SerializeField] private bool _isClimbing;
-        private bool _isOnPlatform;
-
-        private Vector2 _direction;
         private Rigidbody2D _rigidbody;
         private Collider2D _col;
         private Collider2D[] _colOverlaps;
 
-        private void OnEnable()
-        {
-            InvokeRepeating(nameof(AnimateMario), 1f / 15f, 1f / 14f);
-        }
+        [SerializeField] private bool _isGround;
+        public bool IsGround { get { return _isGround; } }
+        [SerializeField] private bool _isClimbing;
+        public bool IsClimbing { get { return _isClimbing; } }
 
-        private void OnDisable()
-        {
-            CancelInvoke();
-        }
+        private Vector2 _direction;
+        public Vector2 Direction { get { return _direction; } }
+        
 
         void Start()
         {
             _marioData = GetComponent<MarioData>();
-            if (_spriteRenderer == null)
-                _spriteRenderer = GetComponent<SpriteRenderer>();
-            if (_climbSprite == null)
-                _climbSprite = GetComponent<Sprite>();
-            if (_runSprites == null)
-                _runSprites = GetComponent<Sprite[]>();
             if (_rigidbody == null)
                 _rigidbody = GetComponent<Rigidbody2D>();
             if (_col == null)
@@ -159,23 +142,6 @@ namespace DonkeyKongPursuit
 
 
             }
-        }
-
-        public void AnimateMario()
-        {
-            if (_isClimbing && !_isGround)
-            {
-                _spriteRenderer.sprite = _climbSprite;
-            }
-
-            else if (_direction.x != 0f && _isGround)
-            {
-                spriteID++;
-                if (spriteID >= _runSprites.Length)
-                    spriteID = 0;
-                _spriteRenderer.sprite = _runSprites[spriteID];
-            }
-
         }
 
     }
