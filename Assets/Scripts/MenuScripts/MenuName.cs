@@ -9,7 +9,6 @@ namespace DonkeyKongPursuit
         Main,
         Pause,
         GameOver,
-        Options
     }
 
 }

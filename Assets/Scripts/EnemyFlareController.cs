@@ -6,12 +6,12 @@ namespace DonkeyKongPursuit
 {
     public class EnemyFlareController : MonoBehaviour
     {
-        [SerializeField] private Transform[] _partrolPoints;
         [SerializeField] private float _flareMovement;
+        [SerializeField] private Transform[] _patrolPoints;
         [SerializeField] private int _patrolDestination;
 
-        [SerializeField] private SpriteRenderer spriteRenderer;
-        [SerializeField] private Sprite[] runSprites;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Sprite[] _flareSprites;
         private int spriteID;
 
         private void OnEnable()
@@ -27,12 +27,12 @@ namespace DonkeyKongPursuit
         // Start is called before the first frame update
         void Start()
         {
-            if (spriteRenderer == null)
-                spriteRenderer = GetComponent<SpriteRenderer>();
-            if (runSprites == null)
-                runSprites = GetComponent<Sprite[]>();
-            if(_partrolPoints == null)
-            _partrolPoints = GetComponent<Transform[]>();
+            if (_spriteRenderer == null)
+                _spriteRenderer= GetComponent<SpriteRenderer>();
+            if (_flareSprites == null)
+                _flareSprites = GetComponent<Sprite[]>();
+            if(_patrolPoints == null)
+                _patrolPoints = GetComponent<Transform[]>();
         }
 
         // Update is called once per frame
@@ -40,15 +40,15 @@ namespace DonkeyKongPursuit
         {
             if (_patrolDestination == 0)
             {
-                transform.position = Vector2.MoveTowards(transform.position, _partrolPoints[0].position, _flareMovement * Time.deltaTime);
-                if(Vector2.Distance(transform.position, _partrolPoints[0].position)< 1f)
+                transform.position = Vector2.MoveTowards(transform.position, _patrolPoints[0].position, _flareMovement * Time.deltaTime);
+                if(Vector2.Distance(transform.position, _patrolPoints[0].position)< 1f)
                     _patrolDestination = 1;
             }
 
             if (_patrolDestination == 1)
             {
-                transform.position = Vector2.MoveTowards(transform.position, _partrolPoints[1].position, _flareMovement * Time.deltaTime);
-                if (Vector2.Distance(transform.position, _partrolPoints[1].position) < 1f)
+                transform.position = Vector2.MoveTowards(transform.position, _patrolPoints[1].position, _flareMovement * Time.deltaTime);
+                if (Vector2.Distance(transform.position, _patrolPoints[1].position) < 1f)
                     _patrolDestination = 0;
             }
 
@@ -57,19 +57,19 @@ namespace DonkeyKongPursuit
         {
             if (_patrolDestination == 1)
             {
-                spriteRenderer.flipX = true;
+                _spriteRenderer.flipX = true;
             }
             else
             {
-                spriteRenderer.flipX = false;
+                _spriteRenderer.flipX = false;
             }
 
             if (transform.position.x != 0f)
             {
                 spriteID++;
-                if (spriteID >= runSprites.Length)
+                if (spriteID >= _flareSprites.Length)
                     spriteID = 0;
-                spriteRenderer.sprite = runSprites[spriteID];
+                _spriteRenderer.sprite = _flareSprites[spriteID];
             }
 
                 

@@ -35,7 +35,6 @@ namespace DonkeyKongPursuit
 
         public void AnimateMario()
         {
-
             if (_marioCtrl.Direction.x != 0f && _marioCtrl.IsGround)
             {
                 spriteID++;
