@@ -58,8 +58,6 @@ namespace DonkeyKongPursuit
             }
         }
 
-
-
         public void PlayMusic(AudioClip clip)
         {
             _musicPlayer.clip = clip;

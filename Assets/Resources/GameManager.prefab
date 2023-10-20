@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f132b22b7cba345a6837a7f6f2ddaa77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelMusicSource: {fileID: 0}
   _score: 0
   _lives: 0
   _currentLevel: 2
-  audioPlayer: {fileID: 3766102290520135367, guid: b16519c15bc1d42bb9d9a83a7ac66000, type: 3}

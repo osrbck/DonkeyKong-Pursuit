@@ -12,6 +12,8 @@ namespace DonkeyKongPursuit
 
         #region Fields
 
+        [SerializeField] AudioSource _levelMusicSource;
+
         [SerializeField] private int _score;
         [SerializeField] private int _lives;
         [SerializeField] private int _currentLevel;
@@ -63,7 +65,7 @@ namespace DonkeyKongPursuit
             if (cam != null)
                 cam.cullingMask = 0;
 
-            Invoke(nameof(LoadingScene), 2.3f);
+            Invoke(nameof(LoadingScene), 3.5f);
         }
 
 
@@ -85,6 +87,7 @@ namespace DonkeyKongPursuit
 
         public void OnLevelFailed()
         {
+
             _lives--;
             if (_lives <= 0)
             {

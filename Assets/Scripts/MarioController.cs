@@ -10,6 +10,12 @@ namespace DonkeyKongPursuit
         private MarioData _marioData;
         public MarioData MarioData { get { return _marioData; } }
 
+        //[SerializeField] private AudioClip _sfxFailed;
+        [SerializeField] private AudioSource _musicSource;
+        [SerializeField] private AudioSource _sfxJump;
+        [SerializeField] private AudioSource _sfxWin;
+        [SerializeField] private AudioSource _sfxFailed;
+
         private Rigidbody2D _rigidbody;
         private Collider2D _col;
         private Collider2D[] _colOverlaps;
@@ -21,7 +27,6 @@ namespace DonkeyKongPursuit
 
         private Vector2 _direction;
         public Vector2 Direction { get { return _direction; } }
-        
 
         void Start()
         {
@@ -32,6 +37,7 @@ namespace DonkeyKongPursuit
                 _col = GetComponent<Collider2D>();
             if (_colOverlaps == null)
                 _colOverlaps = new Collider2D[4];
+            _musicSource.Play();
         }
 
 
@@ -58,12 +64,16 @@ namespace DonkeyKongPursuit
             if (collision.collider.tag == "Danger" || collision.collider.tag == "Barrel")
             {
                 Destroy(gameObject);
+                _sfxFailed.Play();
+                _musicSource.Pause();
                 GameManager.Instance.OnLevelFailed();
 
             }
             else if (collision.collider.tag == "Princess")
             {
                 enabled = false;
+                _sfxWin.Play();
+                _musicSource.Pause();
                 GameManager.Instance.OnLevelComplated();
             }
         }
@@ -84,6 +94,7 @@ namespace DonkeyKongPursuit
             else if (_isGround && Input.GetKey(KeyCode.W))
             {
                 _direction = Vector2.up * _marioData.JumpSpeed * Time.fixedDeltaTime;
+                _sfxJump.Play();
             }
 
             else
