@@ -7,7 +7,7 @@ namespace DonkeyKongPursuit
 {
     public class HUDManager : MonoBehaviour
     {
-        public int _livesCounter;
+        public int livesCounter;
 
         public Text _livesText;
 
@@ -17,12 +17,12 @@ namespace DonkeyKongPursuit
         }
         private void Start()
         {
-            _livesCounter = GameManager.Instance.PlayerLives;
+            livesCounter = GameManager.Instance.PlayerLives;
         }
 
         private void Update()
         {
-            _livesText.text = "x" + (_livesCounter-1);
+            _livesText.text = "x" + (livesCounter-1);
         }
 
     }

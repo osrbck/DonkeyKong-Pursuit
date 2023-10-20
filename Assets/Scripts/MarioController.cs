@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DonkeyKongPursuit
 {
     public class MarioController : MonoBehaviour
     {
         private MarioData _marioData;
-        public MarioData MarioData { get; private set; }
+        public MarioData MarioData { get { return _marioData; } }
 
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Sprite _climbSprite;
@@ -16,9 +17,9 @@ namespace DonkeyKongPursuit
 
         [SerializeField] private bool _isGround;
         [SerializeField] private bool _isClimbing;
+        private bool _isOnPlatform;
 
         private Vector2 _direction;
-
         private Rigidbody2D _rigidbody;
         private Collider2D _col;
         private Collider2D[] _colOverlaps;
@@ -35,8 +36,7 @@ namespace DonkeyKongPursuit
 
         void Start()
         {
-            if (_marioData == null)
-                _marioData = GetComponent<MarioData>();
+            _marioData = GetComponent<MarioData>();
             if (_spriteRenderer == null)
                 _spriteRenderer = GetComponent<SpriteRenderer>();
             if (_climbSprite == null)
@@ -75,15 +75,13 @@ namespace DonkeyKongPursuit
             if (collision.collider.tag == "Danger")
             {
                 Destroy(gameObject);
-                MenuManager.GoToMenu(MenuName.LevelFailed);
-                //GameManager.Instance.OnLevelFailed();
+                GameManager.Instance.OnLevelFailed();
 
             }
             else if (collision.collider.tag == "Princess")
             {
                 enabled = false;
-                MenuManager.GoToMenu(MenuName.LevelComplated);
-                //GameManager.Instance.OnLevelComplated();
+                GameManager.Instance.OnLevelComplated();
             }
         }
 

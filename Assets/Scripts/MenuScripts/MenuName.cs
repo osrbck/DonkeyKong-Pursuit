@@ -8,9 +8,7 @@ namespace DonkeyKongPursuit
     {
         Main,
         Pause,
-        GameOver,
-        LevelFailed,
-        LevelComplated
+        GameOver
     }
 
 }

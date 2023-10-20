@@ -79,8 +79,7 @@ namespace DonkeyKongPursuit
                 LoadLevel(levelIndex);
             else
             {
-                Destroy(gameObject);
-                MenuManager.GoToMenu(MenuName.Main);
+                LoadLevel(0);
             }
         }
 

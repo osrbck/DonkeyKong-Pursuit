@@ -7,8 +7,6 @@ namespace DonkeyKongPursuit
 {
     public class MainMenu : MonoBehaviour
     {
-        [SerializeField] private GameManager GM;
-
         public void HandlePlayButtonOnClick()
         {
             SceneManager.LoadScene("Preload");
