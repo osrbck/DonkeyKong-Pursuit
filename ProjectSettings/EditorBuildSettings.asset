@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PreLoad.unity
     guid: 9db2b8be3b7fb4fef84af654a85b41fc
+  - enabled: 0
+    path: Assets/Scenes/Level-Credits.unity
+    guid: ff304a513d17d478ea67a9ad1c2197a0
   - enabled: 1
     path: Assets/Scenes/Level-1.unity
     guid: 2cda990e2423bbf4892e6590ba056729

@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace DonkeyKongPursuit
 {
+    /// <summary>
+    // Update the lives display text to the match player lives accurately.
+    /// </summary>
     public class HUDManager : MonoBehaviour
     {
         public int livesCounter;
@@ -22,7 +25,7 @@ namespace DonkeyKongPursuit
 
         private void Update()
         {
-            _livesText.text = "x" + (livesCounter-1);
+            _livesText.text = "x " + (livesCounter-1);
         }
 
     }

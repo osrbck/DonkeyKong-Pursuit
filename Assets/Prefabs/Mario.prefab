@@ -149,7 +149,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.43, y: 1}
+  m_Size: {x: 0.5, y: 1.02}
   m_Direction: 0
 --- !u!114 &4134843781118151966
 MonoBehaviour:
@@ -178,8 +178,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97172ea6da68e4b979fc0facee8d6f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isGround: 0
+  _pause: {fileID: 0}
+  _sfxJump: {fileID: 0}
+  _sfxWin: {fileID: 0}
+  _sfxFailed: {fileID: 0}
+  _musicSource: {fileID: 0}
   _isClimbing: 0
+  _isGround: 0
+  _jumpReady: 0
+  _jumpCD: 0.9
 --- !u!114 &7769472713606727456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,9 +201,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _marioCtrl: {fileID: -4451799969688979341}
   _spriteRenderer: {fileID: 65852058892641938}
-  _climbSprite: {fileID: 21300000, guid: 6116d08fe00d842c685425ec93239a70, type: 3}
+  _climbSprites:
+  - {fileID: 21300000, guid: 6116d08fe00d842c685425ec93239a70, type: 3}
+  - {fileID: 21300000, guid: 8fd8d7558bc5e4e7c84f2d6b9549aebc, type: 3}
   _runSprites:
   - {fileID: 21300000, guid: 11f84e45a4ff44d98869b3290ea0c504, type: 3}
+  - {fileID: 21300000, guid: 0efe4bc5d25a543b287f2e51a62dc0c0, type: 3}
+  - {fileID: 21300000, guid: ac1f5368a0034460b951b6d95da932e4, type: 3}
   - {fileID: 21300000, guid: 0efe4bc5d25a543b287f2e51a62dc0c0, type: 3}
   - {fileID: 21300000, guid: ac1f5368a0034460b951b6d95da932e4, type: 3}
   - {fileID: 21300000, guid: 11f84e45a4ff44d98869b3290ea0c504, type: 3}

@@ -12,19 +12,15 @@ namespace DonkeyKongPursuit
         [SerializeField] private float _minTime;
         [SerializeField] private float _maxTime;
 
-
         private void Start()
         {
             if (_barrelPrefab == null)
                 _barrelPrefab = GetComponent<GameObject>();
-
             SpawnBarrel();
         }
-
         private void SpawnBarrel()
         {
             Instantiate(_barrelPrefab, transform.position, Quaternion.identity);
-
             Invoke(nameof(SpawnBarrel), UnityEngine.Random.Range(_minTime, _maxTime));
         }
     }

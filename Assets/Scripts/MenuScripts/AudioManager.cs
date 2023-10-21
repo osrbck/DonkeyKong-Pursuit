@@ -8,6 +8,9 @@ namespace DonkeyKongPursuit
 {
     public class AudioManager : MonoBehaviour
     {
+        /// <summary>
+        /// AudioManager Singleton initialization
+        /// </summary>
         public static AudioManager Instance{ get; private set; }
         private void Awake()
         {
@@ -25,16 +28,15 @@ namespace DonkeyKongPursuit
             else
                 IsSoundMuted = true;
         }
-
-
+        #region Fields
         [SerializeField] private AudioSource _musicPlayer;
         [SerializeField] private AudioSource[] _soundChannels;
         [SerializeField] private bool _isMusicMuted;
         [SerializeField] private bool _isSoundMuted;
+        #endregion
 
-        public bool IsMusicMuted
-        {
-            get { return _isMusicMuted; }
+        #region Properties
+        public bool IsMusicMuted{ get { return _isMusicMuted; }
             set
             {
                 _isMusicMuted = value;
@@ -42,10 +44,7 @@ namespace DonkeyKongPursuit
                 PlayerPrefs.SetInt("MusicMuted", _isMusicMuted ? 1 : 0);
             }
         }
-
-        public bool IsSoundMuted
-        {
-            get { return _isSoundMuted; }
+        public bool IsSoundMuted{ get { return _isSoundMuted; }
             set
             {
                 _isSoundMuted = value;
@@ -57,24 +56,6 @@ namespace DonkeyKongPursuit
                 PlayerPrefs.SetInt("SoundMuted", _isSoundMuted ? 1 : 0);
             }
         }
-
-        public void PlayMusic(AudioClip clip)
-        {
-            _musicPlayer.clip = clip;
-            _musicPlayer.Play();
-        }
-
-        public void PlaySound(AudioClip clip)
-        {
-            foreach (var channel in _soundChannels)
-            {
-                if (!channel.isPlaying)
-                {
-                    channel.PlayOneShot(clip);
-                    break;
-                }
-            }
-        }
-
+        #endregion
     }
 }

@@ -14,7 +14,6 @@ namespace DonkeyKongPursuit
             if(_rigidbody == null)
                 _rigidbody = GetComponent<Rigidbody2D>();
         }
-
         private void OnCollisionEnter2D(Collision2D collision)
         {
             //RIGHT represents red-X-arrow of platforms
