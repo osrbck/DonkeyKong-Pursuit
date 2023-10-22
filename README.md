@@ -6,9 +6,6 @@
 - **Version**: Unity 2022.3 (LTS)
 
 
-![Mario Run](https://github.com/osrbck/DonkeyKong-Pursuit/tree/main/Assets/Sprites/Mario_Run3.png)
-
-
 # Mario Controls
 
 >The character control code provided here is designed for 2D platformer games and offers a solid foundation for creating a character that can run, jump, and interact with its environment realistically.
