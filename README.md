@@ -5,10 +5,23 @@
 - **Topics**: Character Physics and Sprites, Game Management
 - **Version**: Unity 2022.3 (LTS)
 
+# Game Manager on Preload Scene
+
+When the game starts, we go to **Preload Scene** and Start the Game Manager. It is designed to be called again at every level with the DontDestroyOnLoad() method.
+
+> Scenes: MainMenu, Preload, Level-1, Level-2, Level-3
+
+> enum ManuName: MainMenu, PauseMenu, GameOver
+
+# Sprite Rendering to Animate
+
+Animations were created with an array of a few sprites.
+
+> Using the InvokeRepeating() method On Enable.
 
 # Mario Controls
 
->The character control code provided here is designed for 2D platformer games and offers a solid foundation for creating a character that can run, jump, and interact with its environment realistically.
+> The character control code provided here is designed for 2D platformer games and offers a solid foundation for creating a character that can run, jump, and interact with its environment realistically.
 
 **Responsive Movement:** The control system provides responsive horizontal movement, allowing the character to run in both directions with appropriate animations and physics-based handling.
 
@@ -20,21 +33,16 @@
 
 **Physics Integration:** The code integrates Unity's built-in 2D physics system, facilitating a consistent and reliable character control experience.
 
+# Patrols
 
-# Sprite Rendering to Animate, Not Animator
+Just like the iconic Mario Controls offer a comprehensive set of mechanics for a platformer, our game introduces dynamic and diverse patrols that add excitement and challenge to each level.
 
-Animations were created with an array of a few sprites using the InvokeRepeating() method On Enable.
+> In our game, we have two key elements: Donkey Kong and FireBalls, both of which are controlled and managed by the Game Manager.
 
+**Donkey Kong:**
+Equipped with a Barrel Spawner, which Kong uses during specific time periods to throw barrels. With the ability to change sprites and introduce new animations, Donkey Kong can become even more unpredictable and engaging.
 
-# Game Manager on Preload Scene
+**FireBalls:**
+Move between specific points and pose a continuous threat to Mario. Their burning effect adds to the game, making it important for players to navigate skillfully to avoid taking damage.
 
-When the game starts, we go to **Preload Scene** and Start the Game Manager. It is designed to be called again at every level with the DontDestroyOnLoad() method.
-> Scenes: MainMenu, Preload, Level-1, Level-2, Level-3 
-
-> enum ManuName: MainMenu, PauseMenu, GameOver
-
-
-
-
-
-
+# When we consider the Donkey Kong game, we can achieve diversity with more sprites and some development.
