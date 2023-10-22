@@ -23,7 +23,7 @@ namespace DonkeyKongPursuit
         [SerializeField] private bool _isClimbing;
         [SerializeField] private bool _isGround;
         [SerializeField] private bool _jumpReady;
-        [SerializeField] private float _jumpCD = 0.9f;
+        [SerializeField] private float _jumpCD = 0.8f;
         #endregion
 
         #region Properties
@@ -95,7 +95,7 @@ namespace DonkeyKongPursuit
             {
                 _direction = Vector2.up * _marioData.JumpSpeed * Time.fixedDeltaTime;
                 _sfxJump.Play();
-                _jumpCD = 1f;
+                _jumpCD = 0.8f;
             }
             else if(_isClimbing)
             {
