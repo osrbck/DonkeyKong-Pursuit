@@ -5,6 +5,8 @@
 - **Topics**: Character Physics and Sprites, Game Management
 - **Version**: Unity 2022.3 (LTS)
 
+### Download : https://osrbck.itch.io/donkeykong-pursuit-x64
+
 # Game Manager on Preload Scene
 
 When the game starts, we go to **Preload Scene** and Start the Game Manager. It is designed to be called again at every level with the DontDestroyOnLoad() method.
